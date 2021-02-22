@@ -1,0 +1,25 @@
+name: deploy
+
+#on: [push]
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'true'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: init ssh, deploy
+      run: |
+        eval $(ssh-agent -s)
+        echo "${{secrets.SERVER_SSH_PRIV_KEY}}" > deploy.key
+        mkdir -p ~/.ssh
+        chmod 0600 deploy.key
+        ssh-add deploy.key
+        echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+        ssh root@${{secrets.SERVER_IP}} "cd /your/workspace/path && sh update.sh "
