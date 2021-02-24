@@ -100,9 +100,15 @@ jobs:
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
     
-    - name: Show config file
-      run: cat openwrt/.config
-      
+    #- name: Show config file
+    #  run: cat openwrt/.config
+    
+    - name: Upload config file
+      uses: actions/upload-artifact@main
+      with:
+        name: Config${{ env.FILE_DATE }}
+        path: openwrt/.config
+    
     - name: Compile the firmware
       id: compile
       run: |
@@ -116,7 +122,9 @@ jobs:
 
     - name: Check space usage
       if: (!cancelled())
-      run: df -hT
+      run: |
+        df -hT
+        ifconfig
 
     - name: Upload bin directory
       uses: actions/upload-artifact@main
