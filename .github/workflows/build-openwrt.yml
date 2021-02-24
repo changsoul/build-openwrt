@@ -99,7 +99,10 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
-
+    
+    - name: Show config file
+      run: cat openwrt/.config
+      
     - name: Compile the firmware
       id: compile
       run: |
