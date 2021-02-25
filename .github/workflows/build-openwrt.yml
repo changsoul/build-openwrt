@@ -83,7 +83,7 @@ jobs:
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
-        $CONFIG_FILE = [ -e ${{ github.event.inputs.configfile }} ] || $CONFIG_FILE
+        $CONFIG_FILE = ${{ github.event.inputs.configfile }} || $CONFIG_FILE
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config && echo "Use config file $CONFIG_FILE"
         chmod +x $DIY_P2_SH
         cd openwrt
