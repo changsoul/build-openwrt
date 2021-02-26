@@ -131,7 +131,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}_${REPO_BRANCH}${CONFIG_FILE}
+        name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}_${{ REPO_BRANCH }}${{ CONFIG_FILE }}
         path: openwrt/bin
 
     - name: Organize files
@@ -147,7 +147,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}_${REPO_BRANCH}${CONFIG_FILE}
+        name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}_${{ REPO_BRANCH }}${{ CONFIG_FILE }}
         path: ${{ env.FIRMWARE }}
 
     - name: Upload firmware to cowtransfer
