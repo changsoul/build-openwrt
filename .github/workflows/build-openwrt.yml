@@ -13,6 +13,10 @@ on:
         description: 'Config file name'
         required: true
         default: '.config'
+      vtag:
+        description: 'Repo branch name or tag name'
+        required: true
+        default: 'v19.07.7'
 
 env:
   REPO_URL: https://github.com/openwrt/openwrt.git
@@ -55,6 +59,7 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
+        [ -n ${{ github.event.inputs.vtag }} ] && REPO_BRANCH="${{ github.event.inputs.vtag }}"
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
@@ -126,7 +131,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}${CONFIG_FILE}
+        name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}_${REPO_BRANCH}${CONFIG_FILE}
         path: openwrt/bin
 
     - name: Organize files
@@ -142,7 +147,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}${CONFIG_FILE}
+        name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}_${REPO_BRANCH}${CONFIG_FILE}
         path: ${{ env.FIRMWARE }}
 
     - name: Upload firmware to cowtransfer
