@@ -106,23 +106,23 @@ CONFIG_PACKAGE_luci-app-https-dns-proxy=y
 CONFIG_PACKAGE_luci-app-mwan3=y
 CONFIG_PACKAGE_luci-app-nlbwmon=y
 
-CONFIG_PACKAGE_luci-app-openvpn=y
-CONFIG_PACKAGE_openvpn-openssl=y
-CONFIG_PACKAGE_openssl-util=y
+#CONFIG_PACKAGE_luci-app-openvpn=y
+#CONFIG_PACKAGE_openvpn-openssl=y
+#CONFIG_PACKAGE_openssl-util=y
+#CONFIG_PACKAGE_luci-app-vpnbypass=y
 
 CONFIG_PACKAGE_luci-app-qos=y
 CONFIG_PACKAGE_luci-app-samba4=y
 
-CONFIG_PACKAGE_luci-app-shadowsocks-libev=y
-CONFIG_PACKAGE_shadowsocks-libev-config=y
-CONFIG_PACKAGE_shadowsocks-libev-ss-local=y
-CONFIG_PACKAGE_shadowsocks-libev-ss-redir=y
-CONFIG_PACKAGE_shadowsocks-libev-ss-rules=y
-CONFIG_PACKAGE_shadowsocks-libev-ss-tunnel=y
+#CONFIG_PACKAGE_luci-app-shadowsocks-libev=y
+#CONFIG_PACKAGE_shadowsocks-libev-config=y
+#CONFIG_PACKAGE_shadowsocks-libev-ss-local=y
+#CONFIG_PACKAGE_shadowsocks-libev-ss-redir=y
+#CONFIG_PACKAGE_shadowsocks-libev-ss-rules=y
+#CONFIG_PACKAGE_shadowsocks-libev-ss-tunnel=y
 
 CONFIG_PACKAGE_luci-app-wireguard=y
 
-CONFIG_PACKAGE_luci-app-vpnbypass=y
 CONFIG_PACKAGE_xray-core=y
 CONFIG_PACKAGE_xray-example=y
 CONFIG_PACKAGE_xray-geodata=y
