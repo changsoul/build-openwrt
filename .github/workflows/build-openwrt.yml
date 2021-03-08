@@ -78,7 +78,7 @@ jobs:
 
     - name: Load custom configuration
       run: |
-        [ -e files ] && cp files openwrt/files
+        [ -e files ] && cp -rp files openwrt/files
         [ -e ${{ github.event.inputs.configfile }} ] && CONFIG_FILE="${{ github.event.inputs.configfile }}" && echo "CONFIG_FILE=${{ github.event.inputs.configfile }}" >> $GITHUB_ENV
         [ -e $CONFIG_FILE ] && cp $CONFIG_FILE openwrt/.config && echo -e "Use config file \"${CONFIG_FILE}\""
         chmod +x $DIY_P2_SH
