@@ -12,7 +12,9 @@ sed -i 's/ssid=OpenWrt/ssid=TestWrt-${devidx}/' package/kernel/mac80211/files/li
 
 # Add other package
 git clone https://github.com/openwrt/packages.git -b openwrt-21.02 $GITHUB_WORKSPACE/other_packages
-mv $GITHUB_WORKSPACE/other_packages/net/xray-core/ feeds/packages/net/
+rm -rf feeds/packages/lang/golang/
+mv $GITHUB_WORKSPACE/other_packages/lang/golang/ feeds/packages/lang/
+mv -f $GITHUB_WORKSPACE/other_packages/net/xray-core/ feeds/packages/net/
 #sed -i 's/..\/..\/lang\/golang\/golang-package.mk/..\/..\/..\/feeds\/packages\/lang\/golang\/golang-package.mk/' package/network/xray-core/Makefile
 rm -rf $GITHUB_WORKSPACE/other_packages
 
