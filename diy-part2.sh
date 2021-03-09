@@ -2,14 +2,14 @@
 
 # Modify default IP and remove 2th port from lan brige
 sed -i 's/192.168.1.1/192.168.1.254/g' package/base-files/files/bin/config_generate >/dev/null 2>&1
-sed -i '/add network switch_vlan/i\                                ports=${ports\/2 \/}' package/base-files/files/bin/config_generate >/dev/null 2>&1
+sed -i '/for key in $keys; do generate_switch $key; done/a\\n        uci set network.@switch_vlan[0].ports="3 6t"' package/base-files/files/bin/config_generate >/dev/null 2>&1
 
 # Turn off uhttpd redirect_https by default
 sed -i 's/redirect_https	1/redirect_https	0/' package/network/services/uhttpd/files/uhttpd.config >/dev/null 2>&1
 
 # Turn on wifi by default and change ssid name
 sed -i '/set wireless.radio${devidx}.disabled=1/d' package/kernel/mac80211/files/lib/wifi/mac80211.sh >/dev/null 2>&1
-sed -i '/uci -q batch <<-EOF/i\                ssid_name="TestWrt"\n                [ $mode_band = "a"] && ssid_name="TestWrt-5G"' package/kernel/mac80211/files/lib/wifi/mac80211.sh >/dev/null 2>&1
+sed -i '/uci -q batch <<-EOF/i\                ssid_name="TestWrt"\n                [ $mode_band = "a" ] && ssid_name="TestWrt-5G"' package/kernel/mac80211/files/lib/wifi/mac80211.sh >/dev/null 2>&1
 sed -i 's/ssid=OpenWrt/ssid=${ssid_name}/' package/kernel/mac80211/files/lib/wifi/mac80211.sh >/dev/null 2>&1
 sed -i '/config dhcp lan/a\        option force 1' package/network/services/dnsmasq/files/dhcp.conf >/dev/null 2>&1
 
