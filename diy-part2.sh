@@ -7,11 +7,11 @@ sed -i '/for key in $keys; do generate_switch $key; done/a\\n        uci set net
 # Turn off uhttpd redirect_https by default
 sed -i 's/redirect_https	1/redirect_https	0/' package/network/services/uhttpd/files/uhttpd.config >/dev/null 2>&1
 
-# Turn on wifi by default and change ssid name
+# Turn on wifi by default and use the name "TestWrt/TestWrt-5G" for ssid
 sed -i '/set wireless.radio${devidx}.disabled=1/d' package/kernel/mac80211/files/lib/wifi/mac80211.sh >/dev/null 2>&1
 sed -i '/uci -q batch <<-EOF/i\                ssid_name="TestWrt"\n                [ $mode_band = "a" ] && ssid_name="TestWrt-5G"' package/kernel/mac80211/files/lib/wifi/mac80211.sh >/dev/null 2>&1
 sed -i 's/ssid=OpenWrt/ssid=${ssid_name}/' package/kernel/mac80211/files/lib/wifi/mac80211.sh >/dev/null 2>&1
-sed -i '/config dhcp lan/a\        option force 1' package/network/services/dnsmasq/files/dhcp.conf >/dev/null 2>&1
+#sed -i '/config dhcp lan/a\        option force 1' package/network/services/dnsmasq/files/dhcp.conf >/dev/null 2>&1
 
 # Add other package
 git clone https://github.com/openwrt/packages.git -b openwrt-21.02 $GITHUB_WORKSPACE/other_packages
