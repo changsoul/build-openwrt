@@ -20,16 +20,16 @@ mv $GITHUB_WORKSPACE/other_packages/lang/golang/ feeds/packages/lang/
 mv -f $GITHUB_WORKSPACE/other_packages/net/xray-core/ package/network/
 sed -i 's/..\/..\/lang\/golang\/golang-package.mk/..\/..\/..\/feeds\/packages\/lang\/golang\/golang-package.mk/' package/network/xray-core/Makefile
 #sed -i '/CATEGORY:=Network/a\  USERID:=xray=6666:xray=6666' package/network/xray-core/Makefile
-sed -i '/DEPENDS:=$(GO_ARCH_DEPENDS) +ca-bundle/a\        +@KERNEL_NAMESPACES +@KERNEL_SECCOMP +procd-ujail +procd-seccomp' package/network/xray-core/Makefile
+sed -i '/DEPENDS:=$(GO_ARCH_DEPENDS) +ca-bundle/a\        +@KERNEL_NAMESPACES +procd-ujail' package/network/xray-core/Makefile
 sed -i 's/DEPENDS:=$(GO_ARCH_DEPENDS) +ca-bundle/DEPENDS:=$(GO_ARCH_DEPENDS) +ca-bundle \\/' package/network/xray-core/Makefile
 sed -i 's/202102250625/202103080146/' package/network/xray-core/Makefile
 sed -i 's/ee41b3c624e27a47b611d7cbee9da605fb9cda7c23bec1326969eb137ca6ebe7/85a3fef921cca17ac7eea4379e643258d8b8ea7dbba52a0b97ac63dc5df995e3/' package/network/xray-core/Makefile
 sed -i 's/20210226210728/20210308021214/' package/network/xray-core/Makefile
 sed -i 's/ef9c30bacc6989a0b9fae6043dcef1ec15af96c01eddfa1f1d1ad93d14864f81/7a88dafe9ce0299742c2a8e30b42eb0433fc31ceb87ed2fb1356b64ff941e7ba/' package/network/xray-core/Makefile
 sed -i 's/procd_set_param user nobody/procd_set_param user xray/' package/network/xray-core/files/xray.init
-echo "xray:*:6666:6666:xray:/var/run/xray:/bin/false" >> package/base-files/files/etc/passwd
+echo "xray:x:0:6666:xray:/var/run/xray:/bin/false" >> package/base-files/files/etc/passwd
 echo "xray:x:6666:xray" >> package/base-files/files/etc/group
-echo "xray:*:0:0:99999:7:::" >> package/base-files/files/etc/shadow
+echo "xray:x:0:0:99999:7:::" >> package/base-files/files/etc/shadow
 rm -rf $GITHUB_WORKSPACE/other_packages
 
 # Fix some packages
