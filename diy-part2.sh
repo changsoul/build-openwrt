@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Modify default IP and remove 2th port from lan brige
+# Modify default IP and remove the 2nd port from lan brige
 sed -i 's/192.168.1.1/192.168.1.254/g' package/base-files/files/bin/config_generate >/dev/null 2>&1
 sed -i '/for key in $keys; do generate_switch $key; done/a\\n        uci set network.@switch_vlan[0].ports="3 6t"' package/base-files/files/bin/config_generate >/dev/null 2>&1
 
