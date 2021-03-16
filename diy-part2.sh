@@ -7,6 +7,11 @@ sed -i '/for key in $keys; do generate_switch $key; done/a\\n        uci set net
 # Turn off uhttpd redirect_https by default
 sed -i 's/redirect_https	1/redirect_https	0/' package/network/services/uhttpd/files/uhttpd.config >/dev/null 2>&1
 
+#Enable iptables match socket (-m socket)
+sed -i 's/CONFIG_NF_SOCKET_IPV4/CONFIG_NF_SOCKET_IPV4=y/' package/kernel/linux/modules/netfilter.mk
+#sed -i 's/CONFIG_NF_SOCKET_IPV6/CONFIG_NF_SOCKET_IPV6=y/' package/kernel/linux/modules/netfilter.mk
+sed -i 's/CONFIG_NETFILTER_XT_MATCH_SOCKET/CONFIG_NETFILTER_XT_MATCH_SOCKET=y/' package/kernel/linux/modules/netfilter.mk
+
 # Turn on wifi by default and use the name "TestWrt/TestWrt-5G" for ssid
 sed -i '/set wireless.radio${devidx}.disabled=1/d' package/kernel/mac80211/files/lib/wifi/mac80211.sh >/dev/null 2>&1
 sed -i '/uci -q batch <<-EOF/i\                ssid_name="TestWrt"\n                [ $mode_band = "a" ] && ssid_name="TestWrt-5G"' package/kernel/mac80211/files/lib/wifi/mac80211.sh >/dev/null 2>&1
