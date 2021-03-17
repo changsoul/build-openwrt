@@ -8,10 +8,10 @@ sed -i '/for key in $keys; do generate_switch $key; done/a\\n        uci set net
 sed -i 's/redirect_https	1/redirect_https	0/' package/network/services/uhttpd/files/uhttpd.config >/dev/null 2>&1
 
 #Enable iptables match socket (-m socket)
-sed -i 's/CONFIG_NF_SOCKET_IPV4/CONFIG_NF_SOCKET_IPV4=y/' package/kernel/linux/modules/netfilter.mk
-sed -i 's/CONFIG_NF_SOCKET_IPV6/CONFIG_NF_SOCKET_IPV6=y/' package/kernel/linux/modules/netfilter.mk
-sed -i 's/CONFIG_NETFILTER_XT_MATCH_SOCKET/CONFIG_NETFILTER_XT_MATCH_SOCKET=y/' package/kernel/linux/modules/netfilter.mk
-sed -i '/$(foreach mod,$(IPT_TPROXY-m),$(LINUX_DIR)\/net\/$(mod).ko)/i\  	$(LINUX_DIR)/net/netfilter/xt_socket.ko \\' package/kernel/linux/modules/netfilter.mk
+#sed -i 's/CONFIG_NF_SOCKET_IPV4/CONFIG_NF_SOCKET_IPV4=y/' package/kernel/linux/modules/netfilter.mk
+#sed -i 's/CONFIG_NF_SOCKET_IPV6/CONFIG_NF_SOCKET_IPV6=y/' package/kernel/linux/modules/netfilter.mk
+#sed -i 's/CONFIG_NETFILTER_XT_MATCH_SOCKET/CONFIG_NETFILTER_XT_MATCH_SOCKET=y/' package/kernel/linux/modules/netfilter.mk
+#sed -i '/$(foreach mod,$(IPT_TPROXY-m),$(LINUX_DIR)\/net\/$(mod).ko)/i\  	$(LINUX_DIR)/net/netfilter/xt_socket.ko \\' package/kernel/linux/modules/netfilter.mk
 
 #
 sed -i '/procd_open_instance $cfg/i\        [ "$noresolv" != "1" ] || echo -e "search lan\\nnameserver 127.0.0.1" > /etc/resolv.conf' package/network/services/dnsmasq/files/dnsmasq.init
