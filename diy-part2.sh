@@ -9,8 +9,11 @@ sed -i 's/redirect_https	1/redirect_https	0/' package/network/services/uhttpd/fi
 
 #Enable iptables match socket (-m socket)
 sed -i 's/CONFIG_NF_SOCKET_IPV4/CONFIG_NF_SOCKET_IPV4=y/' package/kernel/linux/modules/netfilter.mk
-#sed -i 's/CONFIG_NF_SOCKET_IPV6/CONFIG_NF_SOCKET_IPV6=y/' package/kernel/linux/modules/netfilter.mk
+sed -i 's/CONFIG_NF_SOCKET_IPV6/CONFIG_NF_SOCKET_IPV6=y/' package/kernel/linux/modules/netfilter.mk
 sed -i 's/CONFIG_NETFILTER_XT_MATCH_SOCKET/CONFIG_NETFILTER_XT_MATCH_SOCKET=y/' package/kernel/linux/modules/netfilter.mk
+
+#
+sed -i '/procd_open_instance $cfg/i\        [ "$noresolv" != "1" ] || echo -e "search lan\\nnameserver 127.0.0.1" > /etc/resolv.conf' package/network/services/dnsmasq/files/dnsmasq.init
 
 # Turn on wifi by default and use the name "TestWrt/TestWrt-5G" for ssid
 sed -i '/set wireless.radio${devidx}.disabled=1/d' package/kernel/mac80211/files/lib/wifi/mac80211.sh >/dev/null 2>&1
