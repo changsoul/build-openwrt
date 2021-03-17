@@ -15,6 +15,7 @@ sed -i '/$(foreach mod,$(IPT_TPROXY-m),$(LINUX_DIR)\/net\/$(mod).ko)/i\  	$(LINU
 
 #
 sed -i '/procd_open_instance $cfg/i\        [ "$noresolv" != "1" ] || echo -e "search lan\\nnameserver 127.0.0.1" > /etc/resolv.conf' package/network/services/dnsmasq/files/dnsmasq.init
+sed -i '/$(if $(CONFIG_IPK_FILES_CHECKSUMS),/i\		$(SED) "s#http:#https:#g" $(1)\/etc\/opkg\/distfeeds.conf' package/base-files/Makefile >/dev/null 2>&1
 
 # Turn on wifi by default and use the name "TestWrt/TestWrt-5G" for ssid
 sed -i '/set wireless.radio${devidx}.disabled=1/d' package/kernel/mac80211/files/lib/wifi/mac80211.sh >/dev/null 2>&1
