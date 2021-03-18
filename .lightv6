@@ -135,6 +135,7 @@ CONFIG_IPV6=y
 # CONFIG_BUSYBOX_DEFAULT_FEATURE_IPV6 is not set
 # CONFIG_PACKAGE_kmod-nf-reject6 is not set
 # CONFIG_PACKAGE_kmod-nf-conntrack6 is not set
+# CONFIG_DEFAULT_ip6tables is not set
 # CONFIG_DEFAULT_odhcp6c is not set
 # CONFIG_DEFAULT_odhcpd is not set
 # CONFIG_DEFAULT_odhcpd-ipv6only is not set
