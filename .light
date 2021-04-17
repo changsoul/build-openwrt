@@ -136,7 +136,7 @@ CONFIG_PACKAGE_zlib=y
 #
 # Applications
 #
-CONFIG_PACKAGE_luci-app-adblock=y
+#CONFIG_PACKAGE_luci-app-adblock=y
 #CONFIG_PACKAGE_luci-app-banip=y
 
 CONFIG_PACKAGE_luci-app-ddns=y
@@ -152,7 +152,7 @@ CONFIG_PACKAGE_luci-app-nlbwmon=y
 #CONFIG_PACKAGE_openvpn-openssl=y
 #CONFIG_PACKAGE_openssl-util=y
 
-CONFIG_PACKAGE_luci-app-qos=y
+#CONFIG_PACKAGE_luci-app-qos=y
 CONFIG_PACKAGE_luci-app-samba=y
 # CONFIG_PACKAGE_luci-app-samba4 is not set
 
